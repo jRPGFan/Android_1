@@ -1,5 +1,3 @@
 <resources>
-    <string name="app_name">Homework_1</string>
-    <string name="some_text">Some Text</string>
-    <string name="twMain">Enter some text below:</string>
+    <string name="app_name">Calculator</string>
 </resources>
