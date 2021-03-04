@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="portrait_layout_margin_start">32dp</dimen>
+    <dimen name="portrait_layout_margin_end">32dp</dimen>
+    <dimen name="layout_button_horizontal_space">8dp</dimen>
+    <dimen name="layout_button_margin_top">0dp</dimen>
+    <dimen name="layout_button_small_width">64dp</dimen>
+    <dimen name="landscape_layout_margin_start">92dp</dimen>
+    <dimen name="landscape_layout_margin_end">92dp</dimen>
+    <dimen name="button_0_width">184dp</dimen>
+    <dimen name="tvFullStatement_height">30dp</dimen>
+    <dimen name="tvResult_height">60dp</dimen>
+    <dimen name="layout_portrait_top_margin">152dp</dimen>
+    <dimen name="layout_landscape_top_margin">20dp</dimen>
+    <dimen name="button_switch_activity_width">75dp</dimen>
+    <dimen name="button_switch_activity_height">40dp</dimen>
+    <dimen name="button_switch_activity_margin_end">5dp</dimen>
+    <dimen name="tvResult_text_size">36sp</dimen>
+    <dimen name="tvFullStatement_text_size">18sp</dimen>
+</resources>
