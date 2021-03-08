@@ -10,14 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Calculator">
         <activity android:name="com.example.Calculator.Calculator_Activity_Simple"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:configChanges="uiMode" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name="com.example.Calculator.Calculator_Activity_Extended"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

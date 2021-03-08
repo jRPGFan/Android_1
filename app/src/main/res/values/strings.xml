@@ -31,4 +31,5 @@
     <string name="button_modulo_division">%</string>
     <string name="button_pi">π</string>
     <string name="division_by_zero">You silly sausage</string>
+    <string name="dark_light_mode">Dark/Light Mode</string>
 </resources>
