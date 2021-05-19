@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CalculatorSimple">
+        <item name="android:layout_marginStart">@dimen/portrait_layout_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/portrait_layout_margin_end</item>
+    </style>
+</resources>

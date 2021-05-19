@@ -1,6 +1,8 @@
 package com.example.Calculator;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -10,42 +12,47 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textview.MaterialTextView;
+
 public class Calculator_Activity_Extended extends AppCompatActivity {
-    TextView fullStatementTextView;
-    TextView resultTextView;
+    MaterialTextView fullStatementTextView;
+    MaterialTextView resultTextView;
 
-    Button btn0;
-    Button btn1;
-    Button btn2;
-    Button btn3;
-    Button btn4;
-    Button btn5;
-    Button btn6;
-    Button btn7;
-    Button btn8;
-    Button btn9;
+    MaterialButton btn0;
+    MaterialButton btn1;
+    MaterialButton btn2;
+    MaterialButton btn3;
+    MaterialButton btn4;
+    MaterialButton btn5;
+    MaterialButton btn6;
+    MaterialButton btn7;
+    MaterialButton btn8;
+    MaterialButton btn9;
 
-    Button btnAdd;
-    Button btnSubtract;
-    Button btnMultiply;
-    Button btnDivide;
-    Button btnDecimal;
-    Button btnBackspace;
-    Button btnClear;
-    Button btnEquals;
+    MaterialButton btnAdd;
+    MaterialButton btnSubtract;
+    MaterialButton btnMultiply;
+    MaterialButton btnDivide;
+    MaterialButton btnDecimal;
+    MaterialButton btnBackspace;
+    MaterialButton btnClear;
+    MaterialButton btnEquals;
 
-    Button btnSin;
-    Button btnCos;
-    Button btnTan;
-    Button btnLog;
-    Button btnLn;
-    Button btnPower;
-    Button btnRoot;
-    Button btnFactorial;
-    Button btnModulo;
-    Button btnPi;
+    MaterialButton btnSin;
+    MaterialButton btnCos;
+    MaterialButton btnTan;
+    MaterialButton btnLog;
+    MaterialButton btnLn;
+    MaterialButton btnPower;
+    MaterialButton btnRoot;
+    MaterialButton btnFactorial;
+    MaterialButton btnModulo;
+    MaterialButton btnPi;
 
-    Button btnBack;
+    MaterialButton btnBack;
+    SwitchMaterial switchTheme;
 
     double result = 0;
     double currentNumber;
@@ -70,50 +77,58 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
     //private static final char PI = 'p';
     private char CURRENT_ACTION;
 
+    private static final String PREFERENCES = "preferences.xml";
+    private static final String NIGHT_MODE_PREFERENCE = "isNightMode";
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        sharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        checkNightMode();
         setContentView(R.layout.activity_calculator_extended);
         initControls();
         initControlListeners();
     }
 
     private void initControls(){
-        fullStatementTextView = (TextView)findViewById(R.id.tvFullStatement);
+        fullStatementTextView = findViewById(R.id.tvFullStatement);
         fullStatementTextView.setMovementMethod(new ScrollingMovementMethod());
-        resultTextView = (TextView)findViewById(R.id.tvResult);
-        btn0 = (Button)findViewById(R.id.button_0);
-        btn1 = (Button)findViewById(R.id.button_1);
-        btn2 = (Button)findViewById(R.id.button_2);
-        btn3 = (Button)findViewById(R.id.button_3);
-        btn4 = (Button)findViewById(R.id.button_4);
-        btn5 = (Button)findViewById(R.id.button_5);
-        btn6 = (Button)findViewById(R.id.button_6);
-        btn7 = (Button)findViewById(R.id.button_7);
-        btn8 = (Button)findViewById(R.id.button_8);
-        btn9 = (Button)findViewById(R.id.button_9);
+        resultTextView = findViewById(R.id.tvResult);
+        btn0 = findViewById(R.id.button_0);
+        btn1 = findViewById(R.id.button_1);
+        btn2 = findViewById(R.id.button_2);
+        btn3 = findViewById(R.id.button_3);
+        btn4 = findViewById(R.id.button_4);
+        btn5 = findViewById(R.id.button_5);
+        btn6 = findViewById(R.id.button_6);
+        btn7 = findViewById(R.id.button_7);
+        btn8 = findViewById(R.id.button_8);
+        btn9 = findViewById(R.id.button_9);
 
-        btnAdd = (Button)findViewById(R.id.button_plus);
-        btnSubtract = (Button)findViewById(R.id.button_minus);
-        btnMultiply = (Button)findViewById(R.id.button_multiply);
-        btnDivide = (Button)findViewById(R.id.button_divide);
-        btnDecimal = (Button)findViewById(R.id.button_decimal);
-        btnEquals = (Button)findViewById(R.id.button_equals);
-        btnBackspace = (Button)findViewById(R.id.button_backspace);
-        btnClear = (Button)findViewById(R.id.button_clear);
-        btnBack = (Button)findViewById(R.id.button_back);
+        btnAdd = findViewById(R.id.button_plus);
+        btnSubtract = findViewById(R.id.button_minus);
+        btnMultiply = findViewById(R.id.button_multiply);
+        btnDivide = findViewById(R.id.button_divide);
+        btnDecimal = findViewById(R.id.button_decimal);
+        btnEquals = findViewById(R.id.button_equals);
+        btnBackspace = findViewById(R.id.button_backspace);
+        btnClear = findViewById(R.id.button_clear);
+        btnBack = findViewById(R.id.button_back);
 
-        btnSin = (Button)findViewById(R.id.button_sin);
-        btnCos = (Button)findViewById(R.id.button_cos);
-        btnTan = (Button)findViewById(R.id.button_tan);
-        btnLog = (Button)findViewById(R.id.button_log);
-        btnLn = (Button)findViewById(R.id.button_ln);
-        btnPower = (Button)findViewById(R.id.button_power);
-        btnRoot = (Button)findViewById(R.id.button_root);
-        btnFactorial = (Button)findViewById(R.id.button_factorial);
-        btnModulo = (Button)findViewById(R.id.button_modulo_division);
-        btnPi = (Button)findViewById(R.id.button_pi);
+        btnSin = findViewById(R.id.button_sin);
+        btnCos = findViewById(R.id.button_cos);
+        btnTan = findViewById(R.id.button_tan);
+        btnLog = findViewById(R.id.button_log);
+        btnLn = findViewById(R.id.button_ln);
+        btnPower = findViewById(R.id.button_power);
+        btnRoot = findViewById(R.id.button_root);
+        btnFactorial = findViewById(R.id.button_factorial);
+        btnModulo = findViewById(R.id.button_modulo_division);
+        btnPi = findViewById(R.id.button_pi);
+        switchTheme = findViewById(R.id.darkLightModeSwitcher);
+        switchTheme.setChecked(sharedPreferences.getBoolean(NIGHT_MODE_PREFERENCE, false));
     }
 
     private void initControlListeners(){
@@ -153,6 +168,7 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
 //                startActivity(switchToSecondActivityIntent);
             finish();
         });
+        switchTheme.setOnClickListener(v -> switchTheme());
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -443,4 +459,31 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+
+    private void switchTheme(){
+        if (switchTheme.isChecked()){
+            getApplication().setTheme(R.style.Theme_CalculatorDark);
+            saveNightModeState(true);
+        }
+
+        else {
+            getApplication().setTheme(R.style.Theme_Calculator);
+            saveNightModeState(false);
+        }
+        recreate();
+    }
+
+    private void checkNightMode(){
+        if (sharedPreferences.getBoolean(NIGHT_MODE_PREFERENCE, false)){
+            setTheme(R.style.Theme_CalculatorDark);
+        }
+        else {
+            setTheme(R.style.Theme_Calculator);
+        }
+    }
+
+    private void saveNightModeState(boolean isNightMode){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(NIGHT_MODE_PREFERENCE, isNightMode).apply();
+    }
 }
