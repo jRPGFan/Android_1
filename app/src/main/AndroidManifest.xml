@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Calculator">
-        <activity android:name="com.example.Calculator.MainActivity">
+        <activity android:name="com.example.Calculator.Calculator_Activity_Simple"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.Calculator.SecondActivity"></activity>
+        <activity android:name="com.example.Calculator.Calculator_Activity_Extended"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
