@@ -11,6 +11,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -48,6 +49,7 @@ public class Calculator_Activity_Simple extends AppCompatActivity {
 
     MaterialButton btnExtend;
     SwitchMaterial switchTheme;
+    ImageView settingsIV;
 
     double result = 0;
     double currentNumber;
@@ -64,6 +66,8 @@ public class Calculator_Activity_Simple extends AppCompatActivity {
 
     private static final String PREFERENCES = "preferences.xml";
     private static final String NIGHT_MODE_PREFERENCE = "isNightMode";
+    private static final String CALCULATOR_EXTENDED = "isExtended";
+    private static final String SHOW_BOTTOM_SETTINGS = "hasBottomSettings";
     SharedPreferences sharedPreferences;
 
     @Override
@@ -72,9 +76,11 @@ public class Calculator_Activity_Simple extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         sharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         checkNightMode();
+        saveCalculatorExtendedMode(false);
         setContentView(R.layout.activity_calculator_simple);
         initControls();
         initControlListeners();
+        showBottomSettings(sharedPreferences.getBoolean(SHOW_BOTTOM_SETTINGS, true));
     }
 
     private void initControls(){
@@ -103,6 +109,7 @@ public class Calculator_Activity_Simple extends AppCompatActivity {
         btnExtend = findViewById(R.id.button_extend);
         switchTheme = findViewById(R.id.darkLightModeSwitcher);
         switchTheme.setChecked(sharedPreferences.getBoolean(NIGHT_MODE_PREFERENCE, false));
+        settingsIV = findViewById(R.id.settingsImageViewButton);
     }
 
     private void initControlListeners(){
@@ -136,6 +143,13 @@ public class Calculator_Activity_Simple extends AppCompatActivity {
 //            checkNightMode();
 //            recreate();
 //        });
+
+        settingsIV.setOnClickListener(v -> {
+            Intent openSettings = new Intent(Calculator_Activity_Simple.this,
+                    SettingsActivity.class);
+            startActivity(openSettings);
+            finish();
+        });
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -321,8 +335,10 @@ public class Calculator_Activity_Simple extends AppCompatActivity {
     }
 
     private void switchToExtendedActivity(){
-        Intent switchToSecondActivityIntent = new Intent(Calculator_Activity_Simple.this, Calculator_Activity_Extended.class);
+        Intent switchToSecondActivityIntent = new Intent(Calculator_Activity_Simple.this,
+                Calculator_Activity_Extended.class);
         startActivity(switchToSecondActivityIntent);
+        finish();
     }
 
     private void switchTheme(){
@@ -364,5 +380,30 @@ public class Calculator_Activity_Simple extends AppCompatActivity {
     private void saveNightModeState(boolean isNightMode){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(NIGHT_MODE_PREFERENCE, isNightMode).apply();
+
+    }
+
+    private void saveCalculatorExtendedMode(boolean isExtended) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(CALCULATOR_EXTENDED, isExtended).apply();
+    }
+
+    private void showBottomSettings(boolean show) {
+        if (show) {
+            switchTheme.setChecked(sharedPreferences.getBoolean(NIGHT_MODE_PREFERENCE, false));
+            switchTheme.setOnClickListener(v -> switchTheme());
+
+            btnExtend.setOnClickListener(v -> {
+                Intent switchToSecondActivityIntent = new Intent(Calculator_Activity_Simple.this,
+                        Calculator_Activity_Extended.class);
+                startActivity(switchToSecondActivityIntent);
+                finish();
+            });
+        }
+
+        else {
+            switchTheme.setVisibility(View.GONE);
+            btnExtend.setVisibility(View.GONE);
+        }
     }
 }

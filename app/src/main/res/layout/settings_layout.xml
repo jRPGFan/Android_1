@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".SettingsActivity">
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/darkLightModeSwitcherSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_items_margin_start"
+        android:layout_marginEnd="@dimen/settings_items_margin_end"
+        android:text="@string/dark_light_mode"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="@dimen/settings_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/simpleExtendedModeSwitcherSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_items_margin_start"
+        android:layout_marginEnd="@dimen/settings_items_margin_end"
+        android:text="@string/simple_extended_mode"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="@dimen/settings_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darkLightModeSwitcherSetting" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/bottomSettingsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settings_items_margin_start"
+        android:layout_marginEnd="@dimen/settings_items_margin_end"
+        android:text="@string/show_bottom_settings"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="@dimen/settings_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/simpleExtendedModeSwitcherSetting"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSettingsSwitch"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/layoutPreview"
+            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/screenshot_simple_light"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:contentDescription="@string/theme_preview" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/settingsAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_switch_activity_height"
+                android:layout_weight="1"
+                android:text="@string/settings_apply" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/settingsCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_switch_activity_height"
+                android:layout_weight="1"
+                android:text="@string/settings_cancel" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

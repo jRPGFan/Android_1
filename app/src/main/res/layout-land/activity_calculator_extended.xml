@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".Calculator_Activity_Extended"
     tools:ignore="MissingDefaultResource">
 
@@ -15,8 +14,6 @@
         android:layout_marginStart="@dimen/landscape_layout_margin_start"
         android:layout_marginTop="@dimen/layout_landscape_top_margin"
         android:layout_marginEnd="@dimen/landscape_layout_margin_end"
-        android:background="#FFFFFF"
-        android:textColor="#716F6F"
         android:textSize="@dimen/tvFullStatement_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,7 +26,6 @@
         android:layout_height="@dimen/tvResult_height"
         android:layout_marginStart="@dimen/landscape_layout_margin_start"
         android:layout_marginEnd="@dimen/landscape_layout_margin_end"
-        android:background="@color/white"
         android:inputType="numberDecimal"
         android:textAlignment="viewEnd"
         android:textSize="@dimen/tvResult_text_size"
@@ -304,6 +300,7 @@
         android:layout_marginStart="@dimen/layout_button_horizontal_space"
         android:layout_marginTop="@dimen/layout_button_margin_top"
         android:text="@string/button_pi"
+        android:textAllCaps="false"
         app:layout_constraintStart_toEndOf="@+id/button_ln"
         app:layout_constraintTop_toBottomOf="@+id/button_modulo_division" />
 
@@ -328,11 +325,12 @@
         app:layout_constraintTop_toBottomOf="@+id/button_3" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_back"
+        android:id="@+id/button_simple"
         android:layout_width="@dimen/button_switch_activity_width"
         android:layout_height="@dimen/button_switch_activity_height"
-        android:layout_marginEnd="@dimen/button_switch_activity_margin_end"
+        android:layout_marginEnd="@dimen/extra_buttons_margin_end"
         android:text="@string/button_simple"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -342,9 +340,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/switch_dark_light_mode_margin_start"
         android:text="@string/dark_light_mode"
-        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/settingsImageViewButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="@dimen/extra_buttons_margin_end"
+        android:background="@color/transparent"
+        app:srcCompat="@android:drawable/ic_menu_preferences"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/settings_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,10 +12,14 @@
     <dimen name="tvResult_height">60dp</dimen>
     <dimen name="layout_portrait_top_margin">152dp</dimen>
     <dimen name="layout_landscape_top_margin">20dp</dimen>
-    <dimen name="button_switch_activity_width">75dp</dimen>
+    <dimen name="button_switch_activity_width">85dp</dimen>
     <dimen name="button_switch_activity_height">45dp</dimen>
-    <dimen name="button_switch_activity_margin_end">5dp</dimen>
+    <dimen name="extra_buttons_margin_end">5dp</dimen>
     <dimen name="tvResult_text_size">36sp</dimen>
     <dimen name="tvFullStatement_text_size">18sp</dimen>
-    <dimen name="switch_dark_light_mode_margin_start">5dp</dimen>
+    <dimen name="switch_dark_light_mode_margin_start">5sp</dimen>
+    <dimen name="settings_items_margin_start">5dp</dimen>
+    <dimen name="settings_items_margin_end">5dp</dimen>
+    <dimen name="switch_simple_extended_mode_margin_start">5dp</dimen>
+    <dimen name="settings_text_size">18sp</dimen>
 </resources>

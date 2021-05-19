@@ -2,13 +2,13 @@ package com.example.Calculator;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,8 +51,9 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
     MaterialButton btnModulo;
     MaterialButton btnPi;
 
-    MaterialButton btnBack;
+    MaterialButton btnSimple;
     SwitchMaterial switchTheme;
+    ImageView settingsIV;
 
     double result = 0;
     double currentNumber;
@@ -79,6 +80,8 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
 
     private static final String PREFERENCES = "preferences.xml";
     private static final String NIGHT_MODE_PREFERENCE = "isNightMode";
+    private static final String CALCULATOR_EXTENDED = "isExtended";
+    private static final String SHOW_BOTTOM_SETTINGS = "hasBottomSettings";
     SharedPreferences sharedPreferences;
 
     @Override
@@ -87,9 +90,11 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         sharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         checkNightMode();
+        saveCalculatorExtendedMode(true);
         setContentView(R.layout.activity_calculator_extended);
         initControls();
         initControlListeners();
+        showBottomSettings(sharedPreferences.getBoolean(SHOW_BOTTOM_SETTINGS, true));
     }
 
     private void initControls(){
@@ -115,7 +120,6 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
         btnEquals = findViewById(R.id.button_equals);
         btnBackspace = findViewById(R.id.button_backspace);
         btnClear = findViewById(R.id.button_clear);
-        btnBack = findViewById(R.id.button_back);
 
         btnSin = findViewById(R.id.button_sin);
         btnCos = findViewById(R.id.button_cos);
@@ -128,7 +132,8 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
         btnModulo = findViewById(R.id.button_modulo_division);
         btnPi = findViewById(R.id.button_pi);
         switchTheme = findViewById(R.id.darkLightModeSwitcher);
-        switchTheme.setChecked(sharedPreferences.getBoolean(NIGHT_MODE_PREFERENCE, false));
+        btnSimple = findViewById(R.id.button_simple);
+        settingsIV = findViewById(R.id.settingsImageViewButton);
     }
 
     private void initControlListeners(){
@@ -163,12 +168,12 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
         btnModulo.setOnClickListener(actionKeysClickListener);
         btnPi.setOnClickListener(actionKeysClickListener);
 
-        btnBack.setOnClickListener(v -> {
-//                Intent switchToSecondActivityIntent = new Intent(Calculator_Activity_Extended.this, Calculator_Activity_Simple.class);
-//                startActivity(switchToSecondActivityIntent);
+        settingsIV.setOnClickListener(v -> {
+            Intent openSettings = new Intent(Calculator_Activity_Extended.this,
+                    SettingsActivity.class);
+            startActivity(openSettings);
             finish();
         });
-        switchTheme.setOnClickListener(v -> switchTheme());
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -452,7 +457,7 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
             return String.format("%s", number);
     }
 
-//        Button btnSwitchActivity = findViewById(R.id.btnBack);
+//        Button btnSwitchActivity = findViewById(R.id.btnSimple);
 //        btnSwitchActivity.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -485,5 +490,29 @@ public class Calculator_Activity_Extended extends AppCompatActivity {
     private void saveNightModeState(boolean isNightMode){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(NIGHT_MODE_PREFERENCE, isNightMode).apply();
+    }
+
+    private void saveCalculatorExtendedMode(boolean isExtended) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(CALCULATOR_EXTENDED, isExtended).apply();
+    }
+
+    private void showBottomSettings(boolean show) {
+        if (show) {
+            switchTheme.setChecked(sharedPreferences.getBoolean(NIGHT_MODE_PREFERENCE, false));
+            switchTheme.setOnClickListener(v -> switchTheme());
+
+            btnSimple.setOnClickListener(v -> {
+                Intent switchToSecondActivityIntent = new Intent(Calculator_Activity_Extended.this,
+                        Calculator_Activity_Simple.class);
+                startActivity(switchToSecondActivityIntent);
+                finish();
+            });
+        }
+
+        else {
+            switchTheme.setVisibility(View.GONE);
+            btnSimple.setVisibility(View.GONE);
+        }
     }
 }
